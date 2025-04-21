@@ -40,7 +40,18 @@ The main files, which are not in a folder, are the GUI files which consist of:
         -- to clean the build run `make clean`
 
 # HOW TO CONNECT TO DATABASE
-    TODO
+    
+    - Using Mysql workbench or any mysql DB manager,
+        import the data in the northwind file into your database
+            => northwind/... files are found in this directory in the repo
+
+        dvdrental_DB_HOST       =   The server where your database is hosted ("default is localhost")
+        dvdrental_DB_PORT       =   The port number you use to host your database
+        dvdrental_DB_NAME       =   The name of your database
+        dvdrental_DB_USERNAME   =   Your username you use to access the database instance
+        dvdrental_DB_PASSWORD   =   Your password you use to access the database instance
+
+        You will need to have a mysql compatible DB such as using a mysql client => MariaDB
 
 # HOW TO USE
     TODO

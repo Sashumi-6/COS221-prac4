@@ -14,6 +14,7 @@ public class employees {
         JTextField searchbar = new JTextField("", 30);
         searchbar.setMaximumSize(new Dimension(120, 30));
         searchbar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        searchbar.setToolTipText("To Filter results input like [name,city]");
 
         JButton searchButton = new JButton("🔎");
     
@@ -21,7 +22,7 @@ public class employees {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         searchPanel.add(searchbar);
         searchPanel.add(searchButton);
-        
+
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));;
         titlePanel.add(title);
 

@@ -22,7 +22,7 @@ public class database {
             System.out.println("Connected!");
         } catch (Exception e) {
             System.out.println("Connection failed:\n" + e);
-            System.exit(0); //might be a bit extreme
+            System.exit(0); //Death to the program which fails to connect
         }
 
     }
