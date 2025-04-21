@@ -1,5 +1,6 @@
 final class link_database {
     //Eventually add all the data needed into the strings.
+    @SuppressWarnings("unused")
     private final String dvdrental_DB_PROTO = "placeholder",
                    dvdrental_DB_HOST = "placeholder",
                    dvdrental_DB_PORT = "placeholder",
