@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+
 public class Main{
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -17,23 +19,35 @@ public class Main{
         // Tab 1 - Home
         
        
-            JPanel home = new JPanel();
-                
+           JPanel home = new JPanel();
+           home.add(new JLabel("Welcome"));
             
 
-            tabPanel.addTab("🏠Home", home);
+           tabPanel.addTab("🏠 Home", home);
 
             
 
 
         //////////////////////////////////////////////////////////
 
+        // Tab 2 - Employees
+        JPanel employee = employees.employeepanel();
     
+       tabPanel.addTab("👤 Employees", employee);
             
-            frame.add(tabPanel);
+            
            
+            
 
+         //////////////////////////////////////////////////////////
+         
+         // Tab 3 - Products
+         JPanel product = products.productpanel();
+    
+         tabPanel.addTab("🛒 Products", product);
 
-        
+         //////////////////////////////////////////////////////////
+         frame.add(tabPanel);
+         frame.setVisible(true);
     }
 }
