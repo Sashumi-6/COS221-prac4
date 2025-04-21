@@ -39,5 +39,8 @@ The main files, which are not in a folder, are the GUI files which consist of:
         `make build`
         -- to clean the build run `make clean`
 
+# HOW TO CONNECT TO DATABASE
+    TODO
+
 # HOW TO USE
     TODO
