@@ -25,4 +25,3 @@ replay_pid*
 
 #Ignore lib and build
 build/*
-lib/*
