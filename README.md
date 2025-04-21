@@ -27,3 +27,20 @@ The main files, which are not in a folder, are the GUI files which consist of:
 
     => notifications
         What the spec says.. will add all details later to previous and future tabs
+
+# HOW TO BUILD AND RUN
+
+    1. Make sure you have make installed
+        You can verify this with, in cmd, `make --version`
+
+    2. In the makefile, change the JAR_PATH to the path to your Jar executable
+
+    3. In cmd/powershell run:
+        `make build`
+        -- to clean the build run `make clean`
+
+# HOW TO CONNECT TO DATABASE
+    TODO
+
+# HOW TO USE
+    TODO
