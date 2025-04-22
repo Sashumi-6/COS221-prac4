@@ -1,5 +1,7 @@
 package src;
 import java.sql.*;
+
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 public class database {
@@ -77,57 +79,41 @@ public class database {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
         }
-    }   
-
-    public void MODIFY(String type, DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
-        String query = createQuery(type, db_table, params, columns);
-        if (query == "") {
-            System.out.println("ERROR: Unset Query\nGiven Query: " + query);
-            System.exit(0);
-        }
-
-        try (PreparedStatement insertStmt = conn.prepareStatement(query)) {
-            for (int i = 0 ; i < params.length ; i++) {
-                if (params[i] != null) {
-                    insertStmt.setString(i + 1, query);
-                } else insertStmt.setNull(i + 1, Types.NULL);
-            }
-
-            int ret = insertStmt.executeUpdate();
-            System.out.println("Success:\n" + ret + " rows were changed");
-        } catch (SQLException e) {
-            System.out.println("SQL ERROR @INSERT:\n" + e);
-            System.exit(0);
-        }
     }
 
-    private String createQuery(String type, String db_table, String[] params, String ...columns) {
-        String query = "";
+    public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){
+        if (table_model.getRowCount() > 0) table_model.setRowCount(0);
+        String query = "INSERT INTO " + db_table + " (";
+        for (int i = 0 ; i < columns.length ; i++) {
+            query += columns[i] + ((i < columns.length - 1) ? ", " : "");
+        }
+        query += ") VALUES(";
+        for (int i = 0 ; i < params.length ; i++) {
+            query += params[i] + ((i < params.length - 1) ? ", " : "");
+        }
+        query += ")";
 
-        switch (type) {
-            case "insert": 
-                query = "INSERT INTO " + db_table + " (";
-                for (int i = 0 ; i < columns.length ; i++) {
-                    query += columns[i];
-                    if (i < columns.length - 1) query += ", ";
-                    else query += ")";
-                }
-                query += " VALUES(";
-                for (int i = 0 ; i < params.length ; i++) {
-                    params[i] = (params[i].equals("")) ? null : params[i]; // if empty we just make null fr
-                    query += "?";
-                    if (i < params.length - 1) query += ", ";
-                    else query += ")";
-                }
-            break;
-        
-            case "update":
-            break;
-
-            case "delete":
+        System.out.println(query);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(query);
             
-        }
-
-        return query;
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR:\n" + e);
+            System.exit(0);
+        } 
     }
+
+    public void populateComboBox(JComboBox<String> combo, String tableName, String nameCol) {
+        combo.removeAllItems();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet res = stmt.executeQuery("SELECT DISTINCT " + nameCol + " FROM " + tableName);
+            while (res.next()) {
+                combo.addItem(res.getString(nameCol));
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to populate combo box: " + e);
+        }
+    }
+
+
 }
