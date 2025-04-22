@@ -79,7 +79,6 @@ public class database {
             System.exit(0);
         }
     }
-<<<<<<< HEAD
     public ResultSet getProducts() throws SQLException{
       String query = "SELECT company FROM suppliers"  ;
       Statement stmt = conn.createStatement();
@@ -89,8 +88,4 @@ public class database {
     
     }
 
-=======
-
-    
->>>>>>> refs/remotes/origin/Differentiation
 }
