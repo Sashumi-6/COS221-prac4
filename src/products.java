@@ -4,7 +4,18 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 public class products {
+    private static final String table_name = "products";
+    static String[] columnNames = {
+        
+        "product_name",
+        "list_price",
+        "quantity_per_unit",
+        "category"
+    };
+    static DefaultTableModel  model = new DefaultTableModel(columnNames, 0 );
+    static JTable  table = new JTable(model);
     public static JPanel productpanel(){
+    
         JPanel prodPanel = new JPanel(new BorderLayout());
 
         JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -30,22 +41,15 @@ public class products {
         
           
             JComboBox<String> supplierBox = new JComboBox<>();
-            ResultSet res = database.instance().getProducts();
-            try {
-                while(res.next()){
-                    supplierBox.addItem(res.getString(1));
-                }
-            } catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                System.out.println("errr");
-            }
+           
+        
 
         
-            JComboBox<String> categoryBox = new JComboBox<>(new String[] {
-                "1 - Beverages", "2 - Condiments", "3 - Confectionery"
-            });
+            JComboBox<String> categoryBox = new JComboBox<>();
         
-           
+            database db = database.instance();
+            db.populateComboBox(supplierBox, "suppliers", "company");
+            db.populateComboBox(categoryBox, "products" , "category");
             dialog.add(new JLabel("Product Name:"));
             dialog.add(nameField);
         
@@ -70,8 +74,10 @@ public class products {
          
             saveBtn.addActionListener(ev -> {
                 //INSERT SHI
+                String[] params = {"'" + nameField.getText() + "'",quantityField.getText(),priceField.getText(), "'" + categoryBox.getSelectedItem().toString() + "'"};
+                database.instance().InsertUwU(model, table_name, params, columnNames);
                 JOptionPane.showMessageDialog(dialog, "Saved product! ");
-                dialog.dispose();
+               
             });
         
             cancelBtn.addActionListener(ev -> dialog.dispose());
@@ -81,8 +87,8 @@ public class products {
         });
         
         ButtonPanel.add(button);
-        String[] columnNames = {"First Name", "Last Name", "Address", "Address line 2","City","Region","Postal Code","Phone Num","Active"};
-        DefaultTableModel model = new DefaultTableModel();
+        
+        
         model.setColumnIdentifiers(columnNames);
 
         JPanel topPanel = new JPanel();
@@ -92,7 +98,7 @@ public class products {
         topPanel.add(Box.createVerticalStrut(10));
 
 
-        JTable table = new JTable(model);
+      
         JScrollPane scroll = new JScrollPane(table);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -104,5 +110,9 @@ public class products {
         prodPanel.add(scroll,BorderLayout.CENTER);
         return prodPanel;
 
+    }
+
+    public static void showProducts(){
+        database.instance().addToDataModel(model, table_name , null, columnNames);
     }
 }
