@@ -39,6 +39,7 @@ public class database {
     }
 
     //Acts as the sort and init :3
+    // "You cooked with this - Pavan 2025"
     public void addToDataModel(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
         if (table_model.getRowCount() > 0) table_model.setRowCount(0);
 
