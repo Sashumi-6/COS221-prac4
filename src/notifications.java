@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+@SuppressWarnings("unused")
 public class notifications {
     static final String table_name = "customers";
 
@@ -45,8 +46,8 @@ public class notifications {
         tablesPanel.add(inactiveScroll);
 
        
-        JPanel formPanel = new JPanel(new GridLayout(5, 2, 10, 10));
-        JTextField idField = new JTextField(); idField.setEditable(false);
+        JPanel formPanel = new JPanel(new GridLayout(3, 4, 10, 10));
+        JTextField idField = new JTextField();
         JTextField firstNameField = new JTextField();
         JTextField lastNameField = new JTextField();
         JTextField emailField = new JTextField();
@@ -54,14 +55,16 @@ public class notifications {
         JTextField notesField = new JTextField();
 
       
-        formPanel.add(new JLabel("First Name:"));
-        formPanel.add(firstNameField);
-        formPanel.add(new JLabel("Last Name:"));
-        formPanel.add(lastNameField);
-        formPanel.add(new JLabel("Email:"));
-        formPanel.add(emailField);
+        formPanel.add(new JLabel("Identification Number:"));
+        formPanel.add(idField);
         formPanel.add(new JLabel("Business Phone:"));
         formPanel.add(phoneField);
+        formPanel.add(new JLabel("First Name:"));
+        formPanel.add(firstNameField);
+        formPanel.add(new JLabel("Email:"));
+        formPanel.add(emailField);
+        formPanel.add(new JLabel("Last Name:"));
+        formPanel.add(lastNameField);
         formPanel.add(new JLabel("Notes:"));
         formPanel.add(notesField);
 
@@ -71,6 +74,8 @@ public class notifications {
         JButton updateBtn = new JButton("Update");
         JButton deleteBtn = new JButton("Delete");
         JButton clearBtn = new JButton("Clear");
+
+        createBtn.setToolTipText("If you select create, No matter what you insert into the id field it doesn't matter");
 
         buttonPanel.add(createBtn);
         buttonPanel.add(updateBtn);
@@ -96,6 +101,11 @@ public class notifications {
       
         createBtn.addActionListener(e -> {  //put func here 
             System.out.println("Create client");
+            String[] params = {
+                firstNameField.getText(), lastNameField.getText(), emailField.getText(),
+                phoneField.getText(), notesField.getText()
+            };
+            database.instance().MODIFY("insert", allModel, table_name, params, "first_name", "last_name", "email_address", "business_phone");
         });
         updateBtn.addActionListener(e -> {
             System.out.println("Update client");
@@ -113,29 +123,19 @@ public class notifications {
         });
 
        
-        searchField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void insertUpdate(javax.swing.event.DocumentEvent e) { filter(); }
-            public void removeUpdate(javax.swing.event.DocumentEvent e) { filter(); }
-            public void changedUpdate(javax.swing.event.DocumentEvent e) { filter(); }
+        searchField.addActionListener(e -> {
+            String searchParams = searchField.getText();
+            if (!searchParams.equals("")) {
+                String params_for_inactive_str = searchParams + ",notes=inactive";
 
-            private void filter() {
-                String text = searchField.getText().toLowerCase();
-                filterTable(allModel, text);
-                filterTable(inactiveModel, text);
-            }
+                String[] params = searchParams.split(","),
+                params_for_inactive = params_for_inactive_str.split(",");
 
-            private void filterTable(DefaultTableModel model, String text) {
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    boolean matches = false;
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        Object cell = model.getValueAt(i, j);
-                        if (cell != null && cell.toString().toLowerCase().contains(text)) {
-                            matches = true;
-                            break;
-                        }
-                    }
-        
-                }
+                database.instance().addToDataModel(allModel, table_name, params, columns);
+                database.instance().addToDataModel(inactiveModel, table_name, params_for_inactive, columns);
+            } else {
+                database.instance().addToDataModel(allModel, table_name, null, columns);
+                database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
             }
         });
 

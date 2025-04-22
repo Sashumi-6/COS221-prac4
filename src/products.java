@@ -30,15 +30,15 @@ public class products {
         
           
             JComboBox<String> supplierBox = new JComboBox<>();
-            ResultSet res = database.instance().getProducts();
-            try {
-                while(res.next()){
-                    supplierBox.addItem(res.getString(1));
-                }
-            } catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                System.out.println("errr");
-            }
+            // ResultSet res = database.instance().getProducts();
+            // try {
+            //     while(res.next()){
+            //         supplierBox.addItem(res.getString(1));
+            //     }
+            // } catch (SQLException e1) {
+            //     // TODO Auto-generated catch block
+            //     System.out.println("errr");
+            // }
 
         
             JComboBox<String> categoryBox = new JComboBox<>(new String[] {
