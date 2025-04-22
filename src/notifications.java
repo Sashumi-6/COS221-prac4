@@ -20,7 +20,7 @@ public class notifications {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel searchLabel = new JLabel("Search: ");
         JTextField searchField = new JTextField(20);
-        searchField.setToolTipText("Search for results for example [name='Daniel', city='Durban'] ");
+        searchField.setToolTipText("Search for results for example name=Daniel,City=Durban");
         searchPanel.add(searchLabel);
         searchPanel.add(searchField);
 
