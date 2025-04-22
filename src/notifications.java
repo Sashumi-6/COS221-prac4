@@ -105,7 +105,9 @@ public class notifications {
                 firstNameField.getText(), lastNameField.getText(), emailField.getText(),
                 phoneField.getText(), notesField.getText()
             };
-            database.instance().MODIFY("insert", allModel, table_name, params, "first_name", "last_name", "email_address", "business_phone");
+            database.instance().InsertUwU(allModel, table_name, params, "first_name", "last_name", "email_address", "business_phone", "notes");
+            database.instance().addToDataModel(allModel, table_name, null, columns);
+            database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
         });
         updateBtn.addActionListener(e -> {
             System.out.println("Update client");
@@ -125,7 +127,7 @@ public class notifications {
        
         searchField.addActionListener(e -> {
             String searchParams = searchField.getText();
-            if (!searchParams.equals("")) {
+            if (!searchParams.equals("") && searchParams.contains("=")) {
                 String params_for_inactive_str = searchParams + ",notes=inactive";
 
                 String[] params = searchParams.split(","),

@@ -81,7 +81,7 @@ public class database {
         }
     }
 
-    public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){
+    public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
         if (table_model.getRowCount() > 0) table_model.setRowCount(0);
         String query = "INSERT INTO " + db_table + " (";
         for (int i = 0 ; i < columns.length ; i++) {
@@ -89,18 +89,18 @@ public class database {
         }
         query += ") VALUES(";
         for (int i = 0 ; i < params.length ; i++) {
-            query += params[i] + ((i < params.length - 1) ? ", " : "");
+            query += "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
         }
         query += ")";
 
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(query);
-            
+            int changes = stmt.executeUpdate(query);
+            System.out.println("Successfull Query Execution\nRows Effected: " + changes);
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
-        } 
+        }
     }
 
     public void populateComboBox(JComboBox<String> combo, String tableName, String nameCol) {
