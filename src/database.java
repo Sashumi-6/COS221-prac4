@@ -36,13 +36,8 @@ public class database {
     }
 
     //Acts as the sort and init :3
-<<<<<<< HEAD
-    public void addEmplToDataModel(DefaultTableModel table, String[] params, String ...columns) { //CODE FOR employees.java
-        if (table.getRowCount() > 0) table.setRowCount(0);
-=======
     public void addToDataModel(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
         if (table_model.getRowCount() > 0) table_model.setRowCount(0);
->>>>>>> refs/remotes/origin/Differentiation
 
         String query = "SELECT ";
         for (int i = 0 ; i < columns.length ; i++) {
@@ -78,19 +73,5 @@ public class database {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
         }
-    }
-<<<<<<< HEAD
-    public ResultSet getProducts() throws SQLException{
-      String query = "SELECT company FROM suppliers"  ;
-      Statement stmt = conn.createStatement();
-        ResultSet res = stmt.executeQuery(query);
-        return res;
-   
-    
-    }
-
-=======
-
-    
->>>>>>> refs/remotes/origin/Differentiation
+    }   
 }
