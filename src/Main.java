@@ -1,6 +1,4 @@
 package src;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Main{
@@ -23,7 +21,7 @@ public class Main{
            home.add(new JLabel("Welcome"));
             
 
-           tabPanel.addTab("🏠 Home", home);
+           tabPanel.addTab(" Home", home);
 
             
 
@@ -33,7 +31,7 @@ public class Main{
         // Tab 2 - Employees
         JPanel employee = employees.employeepanel();
     
-       tabPanel.addTab("👤 Employees", employee);
+       tabPanel.addTab(" Employees", employee);
             
             
            
@@ -44,7 +42,7 @@ public class Main{
          // Tab 3 - Products
          JPanel product = products.productpanel();
     
-         tabPanel.addTab("🛒 Products", product);
+         tabPanel.addTab(" Products", product);
 
          //////////////////////////////////////////////////////////
          frame.add(tabPanel);
