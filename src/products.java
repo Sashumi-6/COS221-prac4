@@ -60,6 +60,7 @@ public class products {
         
          
             saveBtn.addActionListener(ev -> {
+                //INSERT SHI
                 JOptionPane.showMessageDialog(dialog, "Saved product! ");
                 dialog.dispose();
             });

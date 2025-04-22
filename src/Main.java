@@ -39,7 +39,7 @@ public class Main{
 
 
 
-    tabPanel.addChangeListener(e -> {
+    tabPanel.addChangeListener(e -> { //CHECK WHEN TABS CHANGE
     int selectedIndex = tabPanel.getSelectedIndex();
     String selectedTitle = tabPanel.getTitleAt(selectedIndex).trim();
     if (selectedTitle.equals("Report")) {

@@ -28,6 +28,9 @@ public class employees {
 
         // create search button
         JButton searchButton = new JButton("🔎");
+        searchButton.addActionListener(e -> {
+            ////SEARCH QUERY GOES HERE
+        });
         searchButton.setMaximumSize(new Dimension(100,30));
 
 

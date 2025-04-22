@@ -92,9 +92,16 @@ public class notifications {
         inactiveModel.addRow(new Object[]{"C003", "Carol", "Jones", "carol@example.com", "5555555555"});
 
       
-        createBtn.addActionListener(e -> System.out.println("Create client"));
-        updateBtn.addActionListener(e -> System.out.println("Update client"));
-        deleteBtn.addActionListener(e -> System.out.println("Delete client"));
+        createBtn.addActionListener(e -> {  //put func here 
+            System.out.println("Create client");
+        });
+        updateBtn.addActionListener(e -> {
+            System.out.println("Update client");
+        });
+    
+        deleteBtn.addActionListener(e -> {
+            System.out.println("Delete client");
+        });
         clearBtn.addActionListener(e -> {
             idField.setText("");
             firstNameField.setText("");

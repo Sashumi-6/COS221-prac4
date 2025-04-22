@@ -30,7 +30,7 @@ public class report {
 
 
     public static void refreshReport(DefaultTableModel model) {
-        System.out.println("Refreshing report tab ✅");
+        //MAKE REPORT STUFF - QUERIES
 
         model.setRowCount(0); 
 
