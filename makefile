@@ -1,5 +1,5 @@
 #Add with your JAR path
-# C:/Program Files/Java/jdk-22/bin/ => Daniel
+# C:/Program Files/Java/jdk-22/bin/ => usually default for jdk 22
 JAR_PATH = "C:/Program Files/Java/jdk-22/bin/"
 MYSQL_JAR = "lib\mysql-connector-j-9.3.0.jar"
 
@@ -10,7 +10,9 @@ build:
 	java -cp $(MYSQL_JAR);COS221_Assignment4_u24772756_u24658198.jar src.Main
 
 run:
-	java -cp $(MYSQL_JAR);COS221_Assignment4_u24772756_u24658198.jar src.Main
+	java -cp "lib/mysql-connector-j-9.3.0.jar;COS221_Assignment4_u24772756_u24658198.jar" src.Main
+
+
 
 clean:
 	rmdir /s /q build

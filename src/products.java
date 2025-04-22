@@ -13,6 +13,63 @@ public class products {
 
         JPanel ButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton button = new JButton("Add New Product 🛒");
+        button.addActionListener(e -> {
+            
+             
+           
+            JDialog dialog = new JDialog((Frame) null, "Add New Product", true);
+            dialog.setSize(400, 300);
+            dialog.setLayout(new GridLayout(6, 2, 10, 10));
+            dialog.setLocationRelativeTo(null);
+        
+          
+            JTextField nameField = new JTextField();
+            JTextField quantityField = new JTextField();
+            JTextField priceField = new JTextField();
+        
+          
+            JComboBox<String> supplierBox = new JComboBox<>(new String[] {
+                "1 - Supplier A", "2 - Supplier B", "3 - Supplier C"
+            });
+        
+            JComboBox<String> categoryBox = new JComboBox<>(new String[] {
+                "1 - Beverages", "2 - Condiments", "3 - Confectionery"
+            });
+        
+           
+            dialog.add(new JLabel("Product Name:"));
+            dialog.add(nameField);
+        
+            dialog.add(new JLabel("Quantity per Unit:"));
+            dialog.add(quantityField);
+        
+            dialog.add(new JLabel("Unit Price:"));
+            dialog.add(priceField);
+        
+            dialog.add(new JLabel("Supplier:"));
+            dialog.add(supplierBox);
+        
+            dialog.add(new JLabel("Category:"));
+            dialog.add(categoryBox);
+        
+       
+            JButton saveBtn = new JButton("Save");
+            JButton cancelBtn = new JButton("Cancel");
+            dialog.add(saveBtn);
+            dialog.add(cancelBtn);
+        
+         
+            saveBtn.addActionListener(ev -> {
+                JOptionPane.showMessageDialog(dialog, "Saved product! ");
+                dialog.dispose();
+            });
+        
+            cancelBtn.addActionListener(ev -> dialog.dispose());
+        
+            dialog.setVisible(true);
+            
+        });
+        
         ButtonPanel.add(button);
         String[] columnNames = {"First Name", "Last Name", "Address", "Address line 2","City","Region","Postal Code","Phone Num","Active"};
         DefaultTableModel model = new DefaultTableModel();
