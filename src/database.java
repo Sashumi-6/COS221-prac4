@@ -36,7 +36,7 @@ public class database {
     }
 
     //Acts as the sort and init :3
-    public void addEmplToDataModel(DefaultTableModel table, String[] params, String ...columns) {
+    public void addEmplToDataModel(DefaultTableModel table, String[] params, String ...columns) { //CODE FOR employees.java
         if (table.getRowCount() > 0) table.setRowCount(0);
 
         String query = "SELECT ";
@@ -76,4 +76,13 @@ public class database {
             System.exit(0);
         }
     }
+    public ResultSet getProducts() throws SQLException{
+      String query = "SELECT company FROM suppliers"  ;
+      Statement stmt = conn.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+   
+    
+    }
+
 }
