@@ -35,12 +35,27 @@ public class database {
         return instance;
     }
 
-    public void addEmplToDataModel(DefaultTableModel table, String ...columns) {
+    //Acts as the sort and init :3
+    public void addEmplToDataModel(DefaultTableModel table, String[] params, String ...columns) {
+        if (table.getRowCount() > 0) table.setRowCount(0);
+
         String query = "SELECT ";
         for (int i = 0 ; i < columns.length ; i++) {
             query += columns[i] + ((i < columns.length - 1) ? ", " : "");
         }
-        query += " FROM employees";
+        query += " FROM employees WHERE 1=1";
+
+        if (params != null && params.length > 0) {
+            System.out.println("Sorting...");
+            query += " AND ";
+            int itt = 0;
+            for (String p : params) {
+                String[] col_val_set = p.split("="); //idx[0] => col ; idx[1] => val
+                query += col_val_set[0] + "='" + col_val_set[1] + "'";
+                if (itt++ < params.length - 1) query += " AND ";
+            }
+        }
+        System.out.println(query);
 
         try (Statement stmt = conn.createStatement()) {
             ResultSet res = stmt.executeQuery(query);

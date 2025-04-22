@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("unused")
 public class employees {
     public static JPanel employeepanel() {
         JPanel employeePanel = new JPanel(new BorderLayout());
@@ -24,18 +25,15 @@ public class employees {
         JTextField searchbar = new JTextField("", 30);
         searchbar.setMaximumSize(new Dimension(120, 30));
         searchbar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        searchbar.setToolTipText("To Filter results input like [name,city]");
+        searchbar.setToolTipText("To Filter results input like: name=Ann,city=Johannesburg");
 
         // create search button
         JButton searchButton = new JButton("🔎");
-        searchButton.addActionListener(e -> {
-            ////SEARCH QUERY GOES HERE
-        });
         searchButton.setMaximumSize(new Dimension(100,30));
 
         String[] columnNames = {"first_name", "last_name", "company", "address", "city", "state_province", "country_region", "zip_postal_code", "home_phone", "business_phone"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        database.instance().addEmplToDataModel(model, columnNames);
+        database.instance().addEmplToDataModel(model, null, columnNames);
 
 
         JTable table = new JTable(model);
@@ -51,6 +49,17 @@ public class employees {
         topPanel.add(Box.createVerticalStrut(10));
         employeePanel.add(topPanel, BorderLayout.NORTH);
         employeePanel.add(scroll, BorderLayout.CENTER);
+
+        //Adding event listener => we do this after everything
+        searchButton.addActionListener(e -> {
+            String searchParams = searchbar.getText();
+            if (!searchParams.equals("")) {
+                String[] params = searchParams.split(",");
+                database.instance().addEmplToDataModel(model, params, columnNames);
+            } else {
+                database.instance().addEmplToDataModel(model, null, columnNames);
+            }
+        });
 
         return employeePanel;
     }
