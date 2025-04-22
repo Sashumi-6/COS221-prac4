@@ -20,6 +20,7 @@ public class notifications {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel searchLabel = new JLabel("Search: ");
         JTextField searchField = new JTextField(20);
+        searchField.setToolTipText("Search for results for example [name='Daniel', city='Durban'] ");
         searchPanel.add(searchLabel);
         searchPanel.add(searchField);
 
@@ -42,15 +43,14 @@ public class notifications {
         tablesPanel.add(inactiveScroll);
 
        
-        JPanel formPanel = new JPanel(new GridLayout(5, 2, 10, 10));
+        JPanel formPanel = new JPanel(new GridLayout(4, 2, 10, 10));
         JTextField idField = new JTextField(); idField.setEditable(false);
         JTextField firstNameField = new JTextField();
         JTextField lastNameField = new JTextField();
         JTextField emailField = new JTextField();
         JTextField phoneField = new JTextField();
 
-        formPanel.add(new JLabel("Client ID:"));
-        formPanel.add(idField);
+      
         formPanel.add(new JLabel("First Name:"));
         formPanel.add(firstNameField);
         formPanel.add(new JLabel("Last Name:"));
