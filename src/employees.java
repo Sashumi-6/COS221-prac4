@@ -31,7 +31,7 @@ public class employees {
         searchButton.setMaximumSize(new Dimension(100,30));
 
         // create table model & JTable
-        String[] columnNames = {"First Name", "Last Name", "Address", "Address line 2","City","Region","Postal Code","Phone Num","Active"};
+        String[] columnNames = {"First Name", "Last Name", "Address", "Address line 2","Region","Province","City","Postal Code","Phone Num","Company","Active"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnNames);
 
