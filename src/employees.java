@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("unused")
 public class employees {
+    private static final String table_name = "employees";
+
     public static JPanel employeepanel() {
         JPanel employeePanel = new JPanel(new BorderLayout());
 
@@ -33,7 +35,7 @@ public class employees {
 
         String[] columnNames = {"first_name", "last_name", "company", "address", "city", "state_province", "country_region", "zip_postal_code", "home_phone", "business_phone"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        database.instance().addEmplToDataModel(model, null, columnNames);
+        database.instance().addToDataModel(model, table_name, null, columnNames);
 
 
         JTable table = new JTable(model);
@@ -55,9 +57,9 @@ public class employees {
             String searchParams = searchbar.getText();
             if (!searchParams.equals("")) {
                 String[] params = searchParams.split(",");
-                database.instance().addEmplToDataModel(model, params, columnNames);
+                database.instance().addToDataModel(model, table_name, params, columnNames);
             } else {
-                database.instance().addEmplToDataModel(model, null, columnNames);
+                database.instance().addToDataModel(model, table_name, null, columnNames);
             }
         });
 

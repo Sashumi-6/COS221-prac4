@@ -3,9 +3,9 @@ package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Vector;
 
 public class notifications {
+    static final String table_name = "customers";
 
     public static JPanel notificationpanel() {
         JPanel notifyPanel = new JPanel(new BorderLayout());
@@ -25,13 +25,15 @@ public class notifications {
         searchPanel.add(searchField);
 
     
-        String[] columns = {"Client ID", "First Name", "Last Name", "Email", "Phone"};
+        String[] columns = {"id", "first_name", "last_name", "email_address", "business_phone"};
         DefaultTableModel allModel = new DefaultTableModel(columns, 0);
+        database.instance().addToDataModel(allModel, table_name, null, columns);
         JTable allClientsTable = new JTable(allModel);
         JScrollPane allScroll = new JScrollPane(allClientsTable);
         allScroll.setBorder(BorderFactory.createTitledBorder("All Clients"));
 
         DefaultTableModel inactiveModel = new DefaultTableModel(columns, 0);
+        database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
         JTable inactiveClientsTable = new JTable(inactiveModel);
         JScrollPane inactiveScroll = new JScrollPane(inactiveClientsTable);
         inactiveScroll.setBorder(BorderFactory.createTitledBorder("Inactive Clients"));
@@ -43,12 +45,13 @@ public class notifications {
         tablesPanel.add(inactiveScroll);
 
        
-        JPanel formPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel formPanel = new JPanel(new GridLayout(5, 2, 10, 10));
         JTextField idField = new JTextField(); idField.setEditable(false);
         JTextField firstNameField = new JTextField();
         JTextField lastNameField = new JTextField();
         JTextField emailField = new JTextField();
         JTextField phoneField = new JTextField();
+        JTextField notesField = new JTextField();
 
       
         formPanel.add(new JLabel("First Name:"));
@@ -57,8 +60,10 @@ public class notifications {
         formPanel.add(lastNameField);
         formPanel.add(new JLabel("Email:"));
         formPanel.add(emailField);
-        formPanel.add(new JLabel("Phone:"));
+        formPanel.add(new JLabel("Business Phone:"));
         formPanel.add(phoneField);
+        formPanel.add(new JLabel("Notes:"));
+        formPanel.add(notesField);
 
       
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -77,19 +82,16 @@ public class notifications {
         centerPanel.add(formPanel, BorderLayout.NORTH);
         centerPanel.add(buttonPanel, BorderLayout.CENTER);
 
+
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.add(titlePanel);
         topPanel.add(searchPanel);
 
+
         notifyPanel.add(topPanel, BorderLayout.NORTH);
         notifyPanel.add(tablesPanel, BorderLayout.CENTER);
         notifyPanel.add(centerPanel, BorderLayout.SOUTH);
-
-        
-        allModel.addRow(new Object[]{"C001", "Alice", "Smith", "alice@example.com", "1234567890"});
-        allModel.addRow(new Object[]{"C002", "Bob", "Brown", "bob@example.com", "0987654321"});
-        inactiveModel.addRow(new Object[]{"C003", "Carol", "Jones", "carol@example.com", "5555555555"});
 
       
         createBtn.addActionListener(e -> {  //put func here 
