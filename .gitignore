@@ -11,6 +11,9 @@
 .mtj.tmp/
 
 # Package Files #
+# Ignore *.jar except for the library java files
+*.jar
+!lib/*.jar
 *.war
 *.nar
 *.ear
@@ -22,6 +25,5 @@
 hs_err_pid*
 replay_pid*
 
-#Ignore and build
+# Ignore build #
 build/*
-COS221_Assignment4_u24772756_u24658198.jar

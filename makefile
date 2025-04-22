@@ -13,3 +13,4 @@ run:
 
 clean:
 	rmdir /s /q build
+	del /q COS221_Assignment4_u24772756_u24658198.jar
