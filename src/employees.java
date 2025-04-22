@@ -33,14 +33,10 @@ public class employees {
         });
         searchButton.setMaximumSize(new Dimension(100,30));
 
+        String[] columnNames = {"first_name", "last_name", "company", "address", "city", "state_province", "country_region", "zip_postal_code", "home_phone", "business_phone"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        database.instance().addEmplToDataModel(model, columnNames);
 
-        
-    
-
-        
-        String[] columnNames = {"First Name", "Last Name", "Address", "Address line 2","City","Region","Postal Code","Phone Num","Office","Active"};
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(columnNames);
 
         JTable table = new JTable(model);
         JScrollPane scroll = new JScrollPane(table);
