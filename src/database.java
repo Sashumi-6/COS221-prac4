@@ -25,7 +25,10 @@ public class database {
 
             System.out.println("Connected to: " + dvdrental_DB_NAME + " database\nUSERNAME: " + dvdrental_DB_USERNAME + "\tPASSWORD: " + dvdrental_DB_PASSWORD);
         } catch (Exception e) {
-            System.out.println("Connection failed:\n" + e);
+            String errorMsg = "Connection failed:\n";
+            errorMsg += "\tCURRENT PASSWORD: " + dvdrental_DB_PASSWORD; //Commonly we forget to change the db password lol
+            errorMsg += "\n" + e;
+            System.out.println(errorMsg);
             System.exit(0); //Death to the program which fails to connect
         }
 
@@ -38,6 +41,7 @@ public class database {
     }
 
     //Acts as the sort and init :3
+    // "You cooked with this - Pavan 2025"
     public void addToDataModel(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
         if (table_model.getRowCount() > 0) table_model.setRowCount(0);
 
