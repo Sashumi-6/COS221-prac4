@@ -11,10 +11,10 @@ public class database {
     private final String dvdrental_DB_PORT = "3307/"; // => change port as neccessary || may be 3306
     private final String dvdrental_DB_NAME = "northwind";
     private final String dvdrental_DB_USERNAME = "root"; //change to local username || keep as root
-    private final String dvdrental_DB_PASSWORD = "@cce554me"; // change to your local password || if root, use root password
+    private final String dvdrental_DB_PASSWORD = "PavthePekka2005$"; // change to your local password || if root, use root password
 
     private static database instance;
-    private Connection conn = null;
+    private static Connection conn = null;
 
     database() {
         
@@ -41,10 +41,9 @@ public class database {
     }
 
     public static Connection getConnection(){
-    
-            return conn;
-       
+        return conn;
     }
+ 
 
     //Acts as the sort and init :3
     // "You cooked with this - Pavan 2025"
@@ -94,11 +93,11 @@ public class database {
             query += columns[i] + ((i < columns.length - 1) ? ", " : "");
         }
         query += ") VALUES(";
+      
         for (int i = 0 ; i < params.length ; i++) {
-            query +=  "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
+            query += params[i] + ((i < params.length - 1) ? ", " : "");
         }
         query += ")";
-
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
             int changes = stmt.executeUpdate(query);
