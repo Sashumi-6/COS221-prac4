@@ -101,6 +101,25 @@ public class database {
             System.exit(0);
         } 
     }
+
+    public void DeletetUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){ //MUST HAVE PARAMS
+        if (table_model.getRowCount() > 0) table_model.setRowCount(0);
+        String query = "DELETE";
+       
+        query += " FROM " + db_table + " WHERE 1=1 ";
+        
+        for(int j = 0; j < params.length ; j++){ 
+            query += " AND " + columns[j] + " = " + params[j];
+        }
+        System.out.println(query);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(query);
+            
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR:\n" + e);
+            System.exit(0);
+        } 
+    }
     public void populateComboBox(JComboBox<String> combo, String tableName, String nameCol) {
     combo.removeAllItems();
     try (Statement stmt = conn.createStatement()) {
