@@ -100,21 +100,32 @@ public class notifications {
 
       
         createBtn.addActionListener(e -> {  //put func here 
-            System.out.println("Create client");
+            System.out.println("Creating client...");
             String[] params = {
                 firstNameField.getText(), lastNameField.getText(), emailField.getText(),
                 phoneField.getText(), notesField.getText()
             };
+            for (int i = 0 ; i < params.length ; i++) {
+                if (!params[i].isEmpty()) params[i] = "'" + params[i] + "'";
+                System.out.println(params[i]);
+            }
+
             database.instance().InsertUwU(allModel, table_name, params, "first_name", "last_name", "email_address", "business_phone", "notes");
             database.instance().addToDataModel(allModel, table_name, null, columns);
             database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
         });
         updateBtn.addActionListener(e -> {
-            System.out.println("Update client");
+            System.out.println("Updating client(s)...");
             String[] params = {
                 idField.getText(), firstNameField.getText(), lastNameField.getText(),
                 emailField.getText(), phoneField.getText(), notesField.getText()
-            };
+            };  
+            for (int i = 0 ; i < params.length ; i++) {
+                if (!params[i].isEmpty()) {
+                    if (!params[i].equalsIgnoreCase("null")) params[i] = "'" + params[i] + "'";
+                }
+                System.out.println(params[i]);
+            }
 
             database.instance().UpdateUwU(allModel, table_name, params, columns);
             database.instance().addToDataModel(allModel, table_name, null, columns);
@@ -122,7 +133,28 @@ public class notifications {
         });
     
         deleteBtn.addActionListener(e -> {
-            System.out.println("Delete client");
+            System.out.println("Deleting client(s)...");
+            String[] params = {
+                idField.getText(), firstNameField.getText(), lastNameField.getText(),
+                emailField.getText(), phoneField.getText(), notesField.getText()
+            };
+            int nonEmpty = 0;
+            for (String p : params) { if (!p.isEmpty()) nonEmpty++; }
+            
+            if (nonEmpty > 0) {
+                String[] nonEmptyCols = new String[nonEmpty];
+                String[] nonEmptyParams = new String[nonEmpty];
+                for (int i = 0, j = 0 ; i < nonEmpty ; i++) {
+                    if (!params[i].isEmpty()) {
+                        nonEmptyCols[j] = columns[i];
+                        nonEmptyParams[j++] = params[i];
+                    }
+                }
+
+                database.instance().DeletetUwU(allModel, table_name, nonEmptyParams, nonEmptyCols);
+                database.instance().addToDataModel(allModel, table_name, null, columns);
+                database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
+            }
         });
         clearBtn.addActionListener(e -> {
             idField.setText("");

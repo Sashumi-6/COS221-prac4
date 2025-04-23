@@ -1,4 +1,5 @@
 package src;
+import java.lang.reflect.Type;
 import java.sql.*;
 
 import javax.swing.JComboBox;
@@ -9,9 +10,9 @@ public class database {
     private final String dvdrental_DB_PROTO = "jdbc:mysql:"; // Protocol
     private final String dvdrental_DB_HOST = "//localhost:";
     private final String dvdrental_DB_PORT = "3307/"; // => change port as neccessary || may be 3306
-    private final String dvdrental_DB_NAME = "northwind";
+    private final String dvdrental_DB_NAME = "u24772756_u24658198_northwind";
     private final String dvdrental_DB_USERNAME = "root"; //change to local username || keep as root
-    private final String dvdrental_DB_PASSWORD = "@cce554me"; // change to your local password || if root, use root password
+    private final String dvdrental_DB_PASSWORD = "placeholder"; // change to your local password || if root, use root password
 
     private static database instance;
     private Connection conn = null;
@@ -89,14 +90,18 @@ public class database {
         }
         query += ") VALUES(";
         for (int i = 0 ; i < params.length ; i++) {
-            query +=  "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
+            if (params[i].isEmpty()) query += "NULL" + ((i < params.length - 1) ? ", " : "");
+            else query += params[i] + ((i < params.length - 1) ? ", " : "");
+        }
+        if (query.charAt(query.length() - 1) == ',') {
+            query = query.substring(0 ,query.length() - 1);
         }
         query += ")";
 
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
             int changes = stmt.executeUpdate(query);
-            System.out.println("Successfull Query Execution\nRows Effected: " + changes);
+            System.out.println("Successfull Query Execution(INSERT)\nRows Effected: " + changes);
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
@@ -107,9 +112,10 @@ public class database {
         String WHERE = "WHERE " + columns[0] + "=" + params[0];
         String query = "UPDATE " + db_table + " SET ";
         for (int i = 1 ; i < params.length ; i++) {
-            if (!params[i].isEmpty()) query += columns[i] + "=" + "'"+params[i] + ((i < params.length - 1) ? "', " : "'");
+            if (!params[i].isEmpty()) query += columns[i] + "="+params[i] + ((i < params.length - 1) ? ", " : "");
         }
-        if (query.charAt(query.length() - 1) == ' ' && query.charAt(query.length() - 2) == ',') {
+        if (query.endsWith(", ")) {
+            System.out.println("true");
             query = query.substring(0 ,query.length() - 2);
         }
         query += " " + WHERE;
@@ -117,22 +123,28 @@ public class database {
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
             int changes = stmt.executeUpdate(query);
-            System.out.println("Successfull Query Execution\nRows Effected: " + changes);
+            System.out.println("Successfull Query Execution(UPDATE)\nRows Effected: " + changes);
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
         }
     }
     public void DeletetUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){ //MUST HAVE PARAMS
-        String query = "DELETE FROM " + db_table + "WHERE 1=1 ";
+        String query = "DELETE FROM " + db_table + " WHERE 1=1 ";
 
+        if (params.length > 0) query += "AND ";
         for(int j = 0; j < params.length ; j++){ 
-            query += " AND " + columns[j] + " = " + params[j];
+            if (!params[j].isEmpty()) {
+                if (columns[j].equals("id")) {
+                    query += columns[j] + "="+params[j] + ((j < params.length - 1) ? " AND " : "");
+                } else query += columns[j] + "='"+params[j] + ((j < params.length - 1) ? "' AND " : "'");
+            }
         }
+
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(query);
-            
+            int changes = stmt.executeUpdate(query);
+            System.out.println("Successfull Query Execution(DELETE)\nRows Effected: " + changes);
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
