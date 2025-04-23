@@ -11,7 +11,7 @@ public class database {
     private final String dvdrental_DB_PORT = "3307/"; // => change port as neccessary || may be 3306
     private final String dvdrental_DB_NAME = "northwind";
     private final String dvdrental_DB_USERNAME = "root"; //change to local username || keep as root
-    private final String dvdrental_DB_PASSWORD = "PavthePekka2005$"; // change to your local password || if root, use root password
+    private final String dvdrental_DB_PASSWORD = "@cce554me"; // change to your local password || if root, use root password
 
     private static database instance;
     private Connection conn = null;
@@ -81,7 +81,7 @@ public class database {
         }
     }
 
-    public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){
+    public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
         if (table_model.getRowCount() > 0) table_model.setRowCount(0);
         String query = "INSERT INTO " + db_table + " (";
         for (int i = 0 ; i < columns.length ; i++) {
@@ -89,13 +89,14 @@ public class database {
         }
         query += ") VALUES(";
         for (int i = 0 ; i < params.length ; i++) {
-            query += params[i] + ((i < params.length - 1) ? ", " : "");
+            query += "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
         }
         query += ")";
+
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(query);
-            
+            int changes = stmt.executeUpdate(query);
+            System.out.println("Successfull Query Execution\nRows Effected: " + changes);
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
@@ -120,17 +121,19 @@ public class database {
             System.exit(0);
         } 
     }
+    
+
     public void populateComboBox(JComboBox<String> combo, String tableName, String nameCol) {
-    combo.removeAllItems();
-    try (Statement stmt = conn.createStatement()) {
-        ResultSet res = stmt.executeQuery("SELECT DISTINCT " + nameCol + " FROM " + tableName);
-        while (res.next()) {
-            combo.addItem(res.getString(nameCol));
+        combo.removeAllItems();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet res = stmt.executeQuery("SELECT DISTINCT " + nameCol + " FROM " + tableName);
+            while (res.next()) {
+                combo.addItem(res.getString(nameCol));
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to populate combo box: " + e);
         }
-    } catch (SQLException e) {
-        System.out.println("Failed to populate combo box: " + e);
     }
-}
 
 
 }

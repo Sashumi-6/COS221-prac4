@@ -2,7 +2,8 @@ package src;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.sql.*;
+
+@SuppressWarnings("unused")
 public class products {
     private static final String table_name = "products";
     static String[] columnNames = {
