@@ -26,7 +26,7 @@ public class notifications {
         searchPanel.add(searchField);
 
     
-        String[] columns = {"id", "first_name", "last_name", "email_address", "business_phone"};
+        String[] columns = {"id", "first_name", "last_name", "email_address", "business_phone", "notes"};
         DefaultTableModel allModel = new DefaultTableModel(columns, 0);
         database.instance().addToDataModel(allModel, table_name, null, columns);
         JTable allClientsTable = new JTable(allModel);
@@ -111,6 +111,14 @@ public class notifications {
         });
         updateBtn.addActionListener(e -> {
             System.out.println("Update client");
+            String[] params = {
+                idField.getText(), firstNameField.getText(), lastNameField.getText(),
+                emailField.getText(), phoneField.getText(), notesField.getText()
+            };
+
+            database.instance().UpdateUwU(allModel, table_name, params, columns);
+            database.instance().addToDataModel(allModel, table_name, null, columns);
+            database.instance().addToDataModel(inactiveModel, table_name, new String[]{"notes=inactive"}, columns);
         });
     
         deleteBtn.addActionListener(e -> {

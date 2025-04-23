@@ -3,6 +3,7 @@ package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("unused")
 public class Main {
     public static void main(String[] args) {
         // Initialize the database connection
