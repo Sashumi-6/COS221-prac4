@@ -11,7 +11,7 @@ public class database {
     private final String dvdrental_DB_PORT = "3307/"; // => change port as neccessary || may be 3306
     private final String dvdrental_DB_NAME = "northwind";
     private final String dvdrental_DB_USERNAME = "root"; //change to local username || keep as root
-    private final String dvdrental_DB_PASSWORD = "@cce554me"; // change to your local password || if root, use root password
+    private final String dvdrental_DB_PASSWORD = "PavthePekka2005$"; // change to your local password || if root, use root password
 
     private static database instance;
     private Connection conn = null;
@@ -88,7 +88,7 @@ public class database {
         }
         query += ") VALUES(";
         for (int i = 0 ; i < params.length ; i++) {
-            query += "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
+            query +=  params[i] + ((i < params.length - 1) ? " ," : "");
         }
         query += ")";
 
@@ -99,7 +99,7 @@ public class database {
         } catch (SQLException e) {
             System.out.println("SQL ERROR:\n" + e);
             System.exit(0);
-        }
+        } 
     }
 
     public void UpdateUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
@@ -122,6 +122,22 @@ public class database {
             System.exit(0);
         }
     }
+    public void DeletetUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns){ //MUST HAVE PARAMS
+        String query = "DELETE FROM " + db_table + "WHERE 1=1 ";
+
+        for(int j = 0; j < params.length ; j++){ 
+            query += " AND " + columns[j] + " = " + params[j];
+        }
+        System.out.println(query);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(query);
+            
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR:\n" + e);
+            System.exit(0);
+        } 
+    }
+    
 
     public void populateComboBox(JComboBox<String> combo, String tableName, String nameCol) {
         combo.removeAllItems();

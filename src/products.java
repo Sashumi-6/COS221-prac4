@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 public class products {
     private static final String table_name = "products";
     static String[] columnNames = {
-        
+        "supplier_ids",
         "product_name",
         "list_price",
         "quantity_per_unit",
@@ -75,9 +75,11 @@ public class products {
          
             saveBtn.addActionListener(ev -> {
                 //INSERT SHI
-                String[] params = {"'" + nameField.getText() + "'",quantityField.getText(),priceField.getText(), "'" + categoryBox.getSelectedItem().toString() + "'"};
+                //TODO Order of params is cooked
+                String[] params = {"(SELECT id FROM suppliers WHERE company = '" + supplierBox.getSelectedItem() +"')","'" + nameField.getText() + "'",quantityField.getText(),priceField.getText(), "'" + categoryBox.getSelectedItem().toString() + "'"};
                 database.instance().InsertUwU(model, table_name, params, columnNames);
                 JOptionPane.showMessageDialog(dialog, "Saved product! ");
+                showProducts();
                
             });
         
