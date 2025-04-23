@@ -2,14 +2,14 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `northwind` ;
-CREATE SCHEMA IF NOT EXISTS `northwind` DEFAULT CHARACTER SET latin1 ;
-USE `northwind` ;
+DROP SCHEMA IF EXISTS `u24772756_u24658198_northwind` ;
+CREATE SCHEMA IF NOT EXISTS `u24772756_u24658198_northwind` DEFAULT CHARACTER SET latin1 ;
+USE `u24772756_u24658198_northwind` ;
 
 -- -----------------------------------------------------
 -- Table `northwind`.`customers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`customers` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`customers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `company` VARCHAR(50) NULL DEFAULT NULL,
   `last_name` VARCHAR(50) NULL DEFAULT NULL,
@@ -42,7 +42,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`employees`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`employees` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`employees` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `company` VARCHAR(50) NULL DEFAULT NULL,
   `last_name` VARCHAR(50) NULL DEFAULT NULL,
@@ -75,7 +75,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`privileges`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`privileges` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`privileges` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `privilege_name` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -86,7 +86,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`employee_privileges`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`employee_privileges` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`employee_privileges` (
   `employee_id` INT(11) NOT NULL,
   `privilege_id` INT(11) NOT NULL,
   PRIMARY KEY (`employee_id`, `privilege_id`),
@@ -109,7 +109,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`inventory_transaction_types`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`inventory_transaction_types` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`inventory_transaction_types` (
   `id` TINYINT(4) NOT NULL,
   `type_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -120,7 +120,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`shippers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`shippers` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`shippers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `company` VARCHAR(50) NULL DEFAULT NULL,
   `last_name` VARCHAR(50) NULL DEFAULT NULL,
@@ -153,7 +153,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`orders_tax_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders_tax_status` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`orders_tax_status` (
   `id` TINYINT(4) NOT NULL,
   `tax_status_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -164,7 +164,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`orders_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders_status` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`orders_status` (
   `id` TINYINT(4) NOT NULL,
   `status_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -175,7 +175,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`orders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`orders` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`orders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `employee_id` INT(11) NULL DEFAULT NULL,
   `customer_id` INT(11) NULL DEFAULT NULL,
@@ -235,7 +235,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`products` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`products` (
   `supplier_ids` LONGTEXT NULL DEFAULT NULL,
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `product_code` VARCHAR(25) NULL DEFAULT NULL,
@@ -259,7 +259,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`purchase_order_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_order_status` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`purchase_order_status` (
   `id` INT(11) NOT NULL,
   `status` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -270,7 +270,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`suppliers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`suppliers` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`suppliers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `company` VARCHAR(50) NULL DEFAULT NULL,
   `last_name` VARCHAR(50) NULL DEFAULT NULL,
@@ -303,7 +303,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`purchase_orders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_orders` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`purchase_orders` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `supplier_id` INT(11) NULL DEFAULT NULL,
   `created_by` INT(11) NULL DEFAULT NULL,
@@ -348,7 +348,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`inventory_transactions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`inventory_transactions` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`inventory_transactions` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `transaction_type` TINYINT(4) NOT NULL,
   `transaction_created_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -390,7 +390,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`invoices`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`invoices` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`invoices` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `order_id` INT(11) NULL DEFAULT NULL,
   `invoice_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -413,7 +413,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`order_details_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`order_details_status` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`order_details_status` (
   `id` INT(11) NOT NULL,
   `status_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
@@ -424,7 +424,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`order_details`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`order_details` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`order_details` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `order_id` INT(11) NOT NULL,
   `product_id` INT(11) NULL DEFAULT NULL,
@@ -464,7 +464,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`purchase_order_details`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`purchase_order_details` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`purchase_order_details` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `purchase_order_id` INT(11) NOT NULL,
   `product_id` INT(11) NULL DEFAULT NULL,
@@ -500,7 +500,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`sales_reports`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`sales_reports` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`sales_reports` (
   `group_by` VARCHAR(50) NOT NULL,
   `display` VARCHAR(50) NULL DEFAULT NULL,
   `title` VARCHAR(50) NULL DEFAULT NULL,
@@ -514,7 +514,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `northwind`.`strings`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `northwind`.`strings` (
+CREATE TABLE IF NOT EXISTS `u24772756_u24658198_northwind`.`strings` (
   `string_id` INT(11) NOT NULL AUTO_INCREMENT,
   `string_data` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`string_id`))
