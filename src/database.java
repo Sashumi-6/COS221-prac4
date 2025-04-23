@@ -15,7 +15,7 @@ public class database {
     private final String dvdrental_DB_PASSWORD = "placeholder"; // change to your local password || if root, use root password
 
     private static database instance;
-    private Connection conn = null;
+    private static Connection conn = null;
 
     database() {
         
@@ -40,6 +40,11 @@ public class database {
         if (instance == null) instance = new database();
         return instance;
     }
+
+    public static Connection getConnection(){
+        return conn;
+    }
+ 
 
     //Acts as the sort and init :3
     // "You cooked with this - Pavan 2025"
@@ -89,6 +94,7 @@ public class database {
             query += columns[i] + ((i < columns.length - 1) ? ", " : "");
         }
         query += ") VALUES(";
+      
         for (int i = 0 ; i < params.length ; i++) {
             if (params[i].isEmpty()) query += "NULL" + ((i < params.length - 1) ? ", " : "");
             else query += params[i] + ((i < params.length - 1) ? ", " : "");
@@ -97,7 +103,6 @@ public class database {
             query = query.substring(0 ,query.length() - 1);
         }
         query += ")";
-
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
             int changes = stmt.executeUpdate(query);
