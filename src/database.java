@@ -40,6 +40,12 @@ public class database {
         return instance;
     }
 
+    public static Connection getConnection(){
+    
+            return conn;
+       
+    }
+
     //Acts as the sort and init :3
     // "You cooked with this - Pavan 2025"
     public void addToDataModel(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {

@@ -3,6 +3,8 @@ package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 public class report {
     public static JPanel reportpanel() {
@@ -30,10 +32,8 @@ public class report {
 
 
     public static void refreshReport(DefaultTableModel model) {
-        //MAKE REPORT STUFF - QUERIES
-        
-        
-    }
+
+
 }
 
 
