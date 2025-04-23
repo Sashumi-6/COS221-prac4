@@ -1,5 +1,4 @@
 package src;
-import java.lang.reflect.Type;
 import java.sql.*;
 
 import javax.swing.JComboBox;
