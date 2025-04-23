@@ -31,13 +31,8 @@ public class report {
 
     public static void refreshReport(DefaultTableModel model) {
         //MAKE REPORT STUFF - QUERIES
-
-        model.setRowCount(0); 
-
         
-        model.addRow(new Object[]{"Main Warehouse", "Beverages", 42});
-        model.addRow(new Object[]{"East Depot", "Confectionery", 17});
-        model.addRow(new Object[]{"South Storage", "Condiments", 25});
+        
     }
 }
 

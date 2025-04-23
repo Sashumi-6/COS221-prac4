@@ -75,9 +75,9 @@ public class products {
          
             saveBtn.addActionListener(ev -> {
                 //INSERT SHI
+                //TODO Order of params is cooked
                 String[] params = {"(SELECT id FROM suppliers WHERE company = '" + supplierBox.getSelectedItem() +"')","'" + nameField.getText() + "'",quantityField.getText(),priceField.getText(), "'" + categoryBox.getSelectedItem().toString() + "'"};
-                database.instance().DeletetUwU(model, table_name, params, columnNames
-                );
+                database.instance().InsertUwU(model, table_name, params, columnNames);
                 JOptionPane.showMessageDialog(dialog, "Saved product! ");
                 showProducts();
                
