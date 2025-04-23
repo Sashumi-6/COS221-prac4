@@ -82,7 +82,6 @@ public class database {
     }
 
     public void InsertUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
-        if (table_model.getRowCount() > 0) table_model.setRowCount(0);
         String query = "INSERT INTO " + db_table + " (";
         for (int i = 0 ; i < columns.length ; i++) {
             query += columns[i] + ((i < columns.length - 1) ? ", " : "");
@@ -92,6 +91,27 @@ public class database {
             query += "'" + params[i] + ((i < params.length - 1) ? "', " : "'");
         }
         query += ")";
+
+        System.out.println(query);
+        try (Statement stmt = conn.createStatement()) {
+            int changes = stmt.executeUpdate(query);
+            System.out.println("Successfull Query Execution\nRows Effected: " + changes);
+        } catch (SQLException e) {
+            System.out.println("SQL ERROR:\n" + e);
+            System.exit(0);
+        }
+    }
+
+    public void UpdateUwU(DefaultTableModel table_model, String db_table, String[] params, String ...columns) {
+        String WHERE = "WHERE " + columns[0] + "=" + params[0];
+        String query = "UPDATE " + db_table + " SET ";
+        for (int i = 1 ; i < params.length ; i++) {
+            if (!params[i].isEmpty()) query += columns[i] + "=" + "'"+params[i] + ((i < params.length - 1) ? "', " : "'");
+        }
+        if (query.charAt(query.length() - 1) == ' ' && query.charAt(query.length() - 2) == ',') {
+            query = query.substring(0 ,query.length() - 2);
+        }
+        query += " " + WHERE;
 
         System.out.println(query);
         try (Statement stmt = conn.createStatement()) {
